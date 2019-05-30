@@ -1,52 +1,51 @@
 var viewerElement = document.getElementById('viewer');
 var viewer = new PDFTron.WebViewer({
   path: '../public/lib',
-  l: window.licenseKey
+  l: window.licenseKey,
 }, viewerElement);
 
 var files = [
-  '/public/files/webviewer-demo-annotated.xod',
-  '/public/files/webviewer-demo-annotated.pdf',
-  '/public/files/office.docx'
+  '/files/webviewer-demo-annotated.xod',
+  '/files/webviewer-demo-annotated.pdf',
+  '/files/legal-contract.docx',
 ];
 
 viewerElement.addEventListener('ready', function() {
+  var store = localforage.createInstance({ name: 'store' });
   var viewerInstance = viewer.getInstance();
   var documentsDiv = document.getElementById('documents');
-  var store = localforage.createInstance({ name: 'store' });
+  var list = document.createElement('li');
 
   files.forEach(function(file) {
     var div = document.createElement('div');
-    var fileName = file.split('/').slice(-1)[0];
-    div.innerHTML = fileName;
-
     var button = document.createElement('button');
+    var fileName = file.split('/').slice(-1)[0];
+
+    div.innerHTML = fileName;
     button.innerHTML = 'Open';
     button.onclick = function() {
       if (button.innerHTML === 'Open') {
         store
           .getItem(fileName)
           .then(function(blob) {
+            blob.name = fileName;
             viewerInstance.loadDocument(blob, { filename: fileName });
           });
-        viewerInstance.loadDocument(file);
       } else {
         fetch(file)
           .then(function(response) {
             return response.blob();
           })
           .then(function(blob) {
-            blob.name = fileName;
             store.setItem(fileName, blob);
             button.innerHTML = 'Open';
           })
-          .catch(error => {
+          .catch(() => {
             console.log('Error fetching the file');
           });
       }
     };
 
-    var list = document.createElement('li');
     list.appendChild(div);
     list.appendChild(button);
 

@@ -1,10 +1,10 @@
 var CACHE_NAME = 'v1';
 
 // This file is cached only because we are using this library in this sample
-var localforage = '/public/lib/localforage.min.js'
+var localforage = '/localforage.min.js'
 
 var assets = [
-  '/index.html',
+  '/',
   '/style.css',
   '/index.js',
 ];
@@ -30,6 +30,7 @@ var webViewerFiles = [
   '/public/lib/core/CoreControls.js',
   '/public/lib/core/CoreWorker.js',
   '/public/lib/webviewer.min.js',
+  '/public/license-key.js'
 ];
 
 // The following files are optional
@@ -75,6 +76,7 @@ self.addEventListener('fetch', function(event) {
         if (response) {
           return response;
         }
+
         return fetch(event.request);
       })
   );
