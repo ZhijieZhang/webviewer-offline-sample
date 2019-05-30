@@ -1,7 +1,7 @@
 var CACHE_NAME = 'v1';
 
 // This file is cached only because we are using this library in this sample
-var localforage = '/localforage.min.js'
+var localforage = '/localforage.min.js';
 
 var assets = [
   '/',
@@ -16,21 +16,21 @@ var externalFiles = [
   '/public/lib/core/external/pako_inflate.min.js',
   '/public/lib/core/external/jquery-3.2.1.min.js',
   '/public/lib/core/external/html2canvas.min.js',
-  '/public/lib/core/external/Promise.js'
+  '/public/lib/core/external/Promise.js',
 ];
 
 var uiFiles = [
   '/public/lib/ui/build/index.html',
   '/public/lib/ui/build/style.css',
   '/public/lib/ui/build/webviewer-ui.min.js',
-  '/public/lib/ui/build/i18n/translation-en.json'
+  '/public/lib/ui/build/i18n/translation-en.json',
 ];
 
 var webViewerFiles = [
   '/public/lib/core/CoreControls.js',
   '/public/lib/core/CoreWorker.js',
   '/public/lib/webviewer.min.js',
-  '/public/license-key.js'
+  '/public/license-key.js',
 ];
 
 // The following files are optional
@@ -63,9 +63,9 @@ self.addEventListener('install', function(event) {
           uiFiles,
           webViewerFiles,
           PDFWorkerFiles,
-          OfficeWorkerFiles
+          OfficeWorkerFiles,
         ));
-      })
+      }),
   );
 });
 
@@ -78,6 +78,6 @@ self.addEventListener('fetch', function(event) {
         }
 
         return fetch(event.request);
-      })
+      }),
   );
 });

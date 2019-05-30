@@ -5,7 +5,8 @@ module.exports = {
   },
   globals: {
     PDFTron: true,
-    localforage: true
+    localforage: true,
+    self: true
   },
   extends: 'airbnb-base',
   parserOptions: {

@@ -1,7 +1,7 @@
 var viewerElement = document.getElementById('viewer');
 var viewer = new PDFTron.WebViewer({
   path: '../public/lib',
-  l: window.licenseKey,
+  l: atob(window.licenseKey),
 }, viewerElement);
 
 var files = [
